@@ -38,27 +38,27 @@ const Forms = () => {
   };
 
   const clickMe = e => {
-    // if (
-    //   detail.name === '' ||
-    //   detail.phone === '' ||
-    //   detail.address === '' ||
-    //   detail.email === '' ||
-    //   detail.image === '' ||
-    //   detail.gender === ''
-    // ) {
-    //   console.log(detail);
-    // } else {
-    setShow({hide: true});
-    setProfile({...detail});
-    setDetail({
-      image: {value: ''},
-      gender: {male: 'Mr', Female: 'Ms'},
-      name: '',
-      phone: '',
-      address: '',
-      email: '',
-    });
-    // }
+    if (
+      detail.name === '' ||
+      detail.phone === '' ||
+      detail.address === '' ||
+      detail.email === '' ||
+      detail.image === '' ||
+      detail.gender === ''
+    ) {
+      console.log(detail);
+    } else {
+      setShow({hide: true});
+      setProfile({...detail});
+      setDetail({
+        image: {value: ''},
+        gender: {male: 'Mr', Female: 'Ms'},
+        name: '',
+        phone: '',
+        address: '',
+        email: '',
+      });
+    }
 
     e.preventDefault();
   };
