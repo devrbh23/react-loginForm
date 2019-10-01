@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Male, Female} from 'react-gender';
 
 const Forms = () => {
-  const [hide, setHide] = useState({hide: true});
+  const [select, setSelect] = useState({selectedMenu: 'basicDetail'});
   const [show, setShow] = useState({hide: true});
   const [profileData, setProfile] = useState();
   const [detail, setDetail] = useState({
@@ -38,40 +38,46 @@ const Forms = () => {
   };
 
   const clickMe = e => {
-    if (
-      detail.name === '' ||
-      detail.phone === '' ||
-      detail.address === '' ||
-      detail.email === '' ||
-      detail.image === '' ||
-      detail.gender === ''
-    ) {
-      console.log(detail);
-    } else {
-      setShow({hide: true});
-      setProfile({...detail});
-      setDetail({
-        image: {value: ''},
-        gender: {male: 'Mr', Female: 'Ms'},
-        name: '',
-        phone: '',
-        address: '',
-        email: '',
-      });
-    }
+    // if (
+    //   detail.name === '' ||
+    //   detail.phone === '' ||
+    //   detail.address === '' ||
+    //   detail.email === '' ||
+    //   detail.image === '' ||
+    //   detail.gender === ''
+    // ) {
+    // console.log(detail);
+    // } else {
+    setShow({hide: true});
+    setProfile({...detail});
+    setDetail({
+      image: {value: ''},
+      gender: {male: 'Mr', Female: 'Ms'},
+      name: '',
+      phone: '',
+      address: '',
+      email: '',
+    });
+    // }
 
     e.preventDefault();
   };
 
   const basicDetail = e => {
-    setHide({hide: false});
-    console.log(hide.hide);
+    setSelect({selectedMenu: 'basicDetail'});
+    console.log(select.selectedMenu);
   };
   const interest = e => {
-    setHide({hide: !false});
+    setSelect({selectedMenu: 'interest'});
+  };
+  const social = e => {
+    setSelect({selectedMenu: 'social'});
+  };
+  const work = e => {
+    setSelect({selectedMenu: 'work'});
   };
   const setting = e => {
-    setHide({hide: true});
+    setSelect({selectedMenu: 'setting'});
   };
 
   // console.log(profileData);
@@ -168,89 +174,109 @@ const Forms = () => {
                 <li className="buttonDetail" onClick={interest}>
                   Interest
                 </li>
-                <li className="buttonDetail">socila Life</li>
-                <li className="buttonDetail">work & play</li>
+                <li className="buttonDetail" onClick={social}>
+                  socila Life
+                </li>
+                <li className="buttonDetail" onClick={work}>
+                  work & play
+                </li>
                 <li className="buttonDetail" onClick={setting}>
                   setting
                 </li>
               </div>
             </ul>
           </div>
-          <div className={'userDetail-' + hide.hide}>
-            {hide.hide !== true ? (
-              <ul className="profile">
-                <p className="user">Name:</p>
-                <div className="mrMs">
-                  <select className="men">
-                    <option className="dropDown">
-                      {profileData.gender === 'male'
-                        ? detail.gender.male
-                        : detail.gender.Female}
-                    </option>
-                  </select>
-                  <div>
-                    <li className="name">{profileData.name}</li>
+          <div className="selectMenu">
+            <div className="userDetail">
+              {select.selectedMenu === 'basicDetail' ? (
+                <ul className="profile">
+                  <p className="user">Name:</p>
+                  <div className="mrMs">
+                    <select className="men">
+                      <option className="dropDown">
+                        {profileData.gender === 'male'
+                          ? detail.gender.male
+                          : detail.gender.Female}
+                      </option>
+                    </select>
+                    <div>
+                      <li className="name">{profileData.name}</li>
+                    </div>
                   </div>
-                </div>
-                <p className="user">Phone:</p>
-                <div className="mrMs">
-                  <div className="gmail1">
-                    <img
-                      src={require('./phone.png')}
-                      alt="ddd"
-                      className="gmail"
-                    />
+                  <p className="user">Phone:</p>
+                  <div className="mrMs">
+                    <div className="gmail1">
+                      <img
+                        src={require('./phone.png')}
+                        alt="ddd"
+                        className="gmail"
+                      />
+                    </div>
+                    <div>
+                      <li className="name">{profileData.phone}</li>
+                    </div>
                   </div>
-                  <div>
-                    <li className="name">{profileData.phone}</li>
+                  <p className="user">Address:</p>
+                  <div className="mrMs">
+                    <div className="gmail1">
+                      <img
+                        src={require('./house.png')}
+                        alt="ddd"
+                        className="gmail"
+                      />
+                    </div>
+                    <div>
+                      <li className="name">{profileData.address}</li>
+                    </div>
                   </div>
-                </div>
-                <p className="user">Address:</p>
-                <div className="mrMs">
-                  <div className="gmail1">
-                    <img
-                      src={require('./house.png')}
-                      alt="ddd"
-                      className="gmail"
-                    />
+                  <p className="user">Email:</p>
+                  <div className="mrMs">
+                    <div className="gmail1">
+                      <img
+                        src={require('./dev.jpg')}
+                        alt="ddd"
+                        className="gmail"
+                      />
+                    </div>
+                    <div>
+                      <li className="name">{profileData.email}</li>
+                    </div>
                   </div>
-                  <div>
-                    <li className="name">{profileData.address}</li>
+                  <p className="butn">Gender:</p>
+                  <div className="genders">
+                    {profileData.gender === 'male' ? (
+                      <Male color="#419fcf" />
+                    ) : (
+                      <Female color="#f378ac" />
+                    )}
                   </div>
-                </div>
-                <p className="user">Email:</p>
-                <div className="mrMs">
-                  <div className="gmail1">
-                    <img
-                      src={require('./dev.jpg')}
-                      alt="ddd"
-                      className="gmail"
-                    />
-                  </div>
-                  <div>
-                    <li className="name">{profileData.email}</li>
-                  </div>
-                </div>
-                <p className="butn">Gender:</p>
-                <div className="genders">
-                  {profileData.gender === 'male' ? (
-                    <Male color="#419fcf" />
-                  ) : (
-                    <Female color="#f378ac" />
-                  )}
-                </div>
-              </ul>
-            ) : null}
+                </ul>
+              ) : null}
+            </div>
+            {/* /////// 
+            ///////interst
+                    ///// */}
+
+            <div className="interest">
+              {select.selectedMenu === 'interest' ? <h3> Interest </h3> : null}
+            </div>
+
+            {/* ///setting/// */}
+
+            <div className="interest">
+              {select.selectedMenu === 'setting' ? <h3> setting </h3> : null}
+            </div>
+
+            {/* ////social//// */}
+            <div className="interest">
+              {select.selectedMenu === 'social' ? <h3> social </h3> : null}
+            </div>
+
+            {/* /////Work//// */}
+            <div className="interest">
+              {select.selectedMenu === 'work' ? <h3> Work & Play </h3> : null}
+            </div>
           </div>
-          {/* ///////
-///////interst
-         ///// */}
-
-          {hide.hide === true ? <div className="interest">Interest</div> : null}
-
-          {/* ///setting/// */}
-
-          {hide.hide === true ? <div className="interest">Setting</div> : null}
         </div>
       ) : (
         <div></div>

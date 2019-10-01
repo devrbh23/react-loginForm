@@ -134,10 +134,19 @@ profile data
   cursor: pointer;
 }
 
-.userDetail-false {
+.userDetail {
   width: 65%;
   display: flex;
   justify-content: center;
+}
+
+.selectMenu {
+  width: 100%
+}
+
+.interest {
+  width: 65%;
+  text-align: center
 }
 
 .profile {
